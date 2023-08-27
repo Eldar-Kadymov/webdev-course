@@ -1,0 +1,24 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+
+  <h2>Результат для {{ task.title }}</h2>
+  <p>Статус: {% if is_passed %}Выполнено{% else %}Не выполнено{% endif %}</p>
+  <ul>
+    {% for result in test_results %}
+      <li>
+        {% if result.status == 'passed' %}
+          Тест пройден!
+        {% else %}
+          Тест не пройден
+          <ul>
+            <li>Ожидаемый вывод: {{ result.expected_output }}</li>
+            <li>Актуальный вывод: {{ result.actual_output }}</li>
+            <li>Ошибки: {{ result.error_message }}</li>
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

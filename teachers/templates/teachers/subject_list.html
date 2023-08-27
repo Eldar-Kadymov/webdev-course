@@ -1,0 +1,10 @@
+{% extends 'teachers/base.html' %}
+
+{% block content %}
+<h1>список предметов</h1>
+    <ul>
+        {% for subject in subjects %}
+            <li><a href="{% url 'teachers:task_list' subject.slug %}">{{ subject.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

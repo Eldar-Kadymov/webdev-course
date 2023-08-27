@@ -1,0 +1,90 @@
+{% extends 'teachers/base.html' %}
+
+{% block content %}
+<h1>Создание задания</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="subject" value="{{ subject.id }}">
+    
+    <div id="tests-container">
+        <div class='test-block'>
+            <div class='test-name'>
+                <p>Тест №1</p>
+            </div>
+            <div class='test-form'>
+                <label for="input_0">Входные данные:</label>
+                <input type="text" name="input_0" required>
+                <label for="output_0">Выходные данные:</label>
+                <input type="text" name="output_0" required>
+            </div>
+        </div>
+    </div>
+    
+    <input type="hidden" name="test_count" id="id_test_count" value="1">
+    
+    <button type="button" id="add-test-button">Добавить тест</button>
+    <button type="submit">Создать задание</button>
+</form>
+
+<script>
+    // Счетчик тестов
+    let testCount = 1;
+
+    // Обновлениe номеров тестов в блоках
+    function updateTestNumbers() {
+        // Получаем все блоки тестов
+        const testBlocks = document.querySelectorAll('.test-block');
+        testBlocks.forEach((block, index) => {
+            const testName = block.querySelector('.test-name p');
+            testName.textContent = `Тест №${index + 1}`;
+        });
+    }
+
+    // Обработчик кнопки "Добавить тест"
+    document.getElementById('add-test-button').addEventListener('click', function() {
+        const container = document.getElementById('tests-container');
+        
+        // Создаем блок с новым тестом
+        const testBlock = document.createElement('div');
+        testBlock.classList.add('test-block');
+        testBlock.innerHTML = `
+            <div class='test-name'>
+                <p>Тест №${testCount + 1}</p>
+            </div>
+            <div class='test-form'>
+                <label for="input_${testCount}">Входные данные:</label>
+                <input type="text" name="input_${testCount}" required>
+                <label for="output_${testCount}">Выходные данные:</label>
+                <input type="text" name="output_${testCount}" required>
+                <button type="button" class="delete-test-button">Удалить</button>
+            </div>
+        `;
+
+        // Добавляем блок с тестом в контейнер
+        container.appendChild(testBlock);
+
+        // Увеличиваем счетчик тестов и обновляем его значение в скрытом поле
+        testCount++;
+        document.getElementById('id_test_count').value = testCount;
+
+         // Обновляем номера тестов
+        updateTestNumbers();
+    });
+
+    // Обработчик кнопки "Удалить"
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.classList.contains('delete-test-button')) {
+            const testBlock = event.target.closest('.test-block');
+            if (testBlock) {
+                // Удаляем блок теста, уменьшаем счетчик и обновляем номера тестов
+                testBlock.remove();
+                testCount--;
+                document.getElementById('id_test_count').value = testCount;
+                updateTestNumbers(); // Обновляем номера тестов
+            }
+        }
+    });
+</script>
+
+{% endblock %}

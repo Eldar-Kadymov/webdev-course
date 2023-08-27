@@ -1,0 +1,28 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+  <h2>Предметы</h2>
+  <ul>
+    {% for data in subject_data %}
+      <li>
+        <a href="{% url 'students:task_list' data.subject.slug %}">{{ data.subject.name }}</a>
+        <p>Прогресс выполнения: {{ data.completion_percentage }}%</p>
+        <div class="progress-bar">
+          <div class="progress" data-percentage="{{ data.completion_percentage }}"></div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <script>
+    // Получаем все элементы с классом "progress"
+    const progressBars = document.querySelectorAll('.progress');
+
+    // Проходимся по каждому элементу и устанавливаем ширину в зависимости от data-percentage
+    progressBars.forEach(progressBar => {
+      const percentage = progressBar.getAttribute('data-percentage');
+      progressBar.style.width = percentage + '%';
+    });
+  </script>
+{% endblock %}
+

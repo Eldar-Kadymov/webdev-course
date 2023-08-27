@@ -1,0 +1,23 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+  <h2>{{ task.title }}</h2>
+  {{ task.description }}
+
+  <p>Ваше решение:</p>
+  <form method="post">
+    {% csrf_token %}
+    <textarea id="code-editor" name="code">{{ form.code.value|default:'' }}</textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+
+<script>
+  // Создаем редактор CodeMirror из элемента textarea
+  var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+    lineNumbers: true,  // Показывать номера строк
+    mode: "python",     // Режим подсветки синтаксиса Python
+    theme: "monokai"    // Тема Monokai
+  });
+</script>
+{% endblock %}

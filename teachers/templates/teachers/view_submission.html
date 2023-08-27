@@ -1,0 +1,11 @@
+{% extends 'teachers/base.html' %}
+
+{% block content %}
+<h1>Просмотр решения</h1>
+<p>Студент: {{ submission.student }}</p>
+<p>Задание: {{ submission.task.title }}</p>
+<p>Решение:</p>
+<pre>{{ submission.code }}</pre>
+<p>Результат выполнения тестов:</p>
+<pre>{{ submission.result }}</pre>
+{% endblock %}
