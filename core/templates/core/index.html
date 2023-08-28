@@ -1,81 +1,13 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-  <h2>курс веб разработчика</h2>
-  <h3><a href="{% url 'students:login' %}">Авторизация студента</a></h3>
-  <h3><a href="{% url 'teachers:login' %}">Авторизация преподавателя</a></h3>
-  <a href="#" class="open-popup" data-task-url="{% url 'core:feedback' %}">Обратная связь</a>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-  <div id="popup" class="popup">
-    <div class="popup-content">
-        <span class="close-popup">&times;</span>
-        <div id="popup-content-placeholder"></div>
+<div class="index-block">
+    <div class="index_text">Электронная образовательная система
+        <p>Личная успеваемость, контроль выполнения заданий для студентов</p>
+        <button onclick="document.location='auth_select'" class="btn-primary">Авторизироваться</button>
     </div>
+      {% load static %}<img class="index_img"
+        src="{% static 'core/img/index.png' %}"
+      />
 </div>
-<script>
- // Получаем ссылки, которые открывают попап
-    const openPopupLinks = document.querySelectorAll('.open-popup');
-
-    // Получаем элементы попапа и его контента, а также кнопку закрытия
-    const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popup-content-placeholder');
-    const closePopupButton = document.querySelector('.close-popup');
-
-    // Добавляем обработчики событий для каждой ссылки, открывающей попап
-    openPopupLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault(); // Отменяем стандартное действие ссылки
-            const taskUrl = this.getAttribute('data-task-url'); // Получаем URL задания
-
-            // Загружаем содержимое задания с сервера и отображаем в попапе
-            fetch(taskUrl)
-                .then(response => response.text())
-                .then(html => {
-                    popupContent.innerHTML = html; // Вставляем полученное HTML-содержимое
-                    popup.style.display = 'block'; // Открываем попап
-                });
-        });
-    });
-    
-    // Обработчик клика на кнопку закрытия попапа
-    closePopupButton.addEventListener('click', function () {
-        popup.style.display = 'none'; // Закрываем попап
-        popupContent.innerHTML = ''; // Очищаем содержимое попапа
-    });
-
-
-    // Обработчик отправки формы
-    popupContent.addEventListener('submit', function (event) {
-        event.preventDefault(); // Отменяем стандартное действие формы
-
-        const form = event.target;
-        const formData = new FormData(form);
-
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // После успешной отправки формы показываем сообщение и закрываем попап
-                const successMessage = document.createElement('p');
-                successMessage.textContent = 'Сообщение в поддержку отправлено!';
-                popupContent.appendChild(successMessage);
-
-                setTimeout(function () {
-                    popup.style.display = 'none';
-                    popupContent.innerHTML = ''; // Очищаем содержимое попапа
-                    window.location.reload(); // Перенаправляем на текущую страницу
-                }, 2000); // Ждем 2 секунды перед закрытием попапа
-            } else {
-                // Если есть ошибки формы, показываем их
-            }
-        });
-    });
-</script>
-
-{% endblock %}
+{% endblock content %}

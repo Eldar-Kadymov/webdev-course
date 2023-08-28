@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "rega";
+  src: url("../fonts/rega.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "rega";
+}
+
+.index_text {
+  font-size: 80px;
+  float: left;
+  width: 50%;
+  position: fixed;
+  line-height: 90px;
+  transform: translateX(0%);
+  animation: slide-in-animation 1.5s ease;
+}
+
+@keyframes slide-in-animation {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fade-in-animation {
+  0% { opacity: 0; } 
+  100% { opacity: 1; }
+}
+
+.index-block {
+  margin-left: 16%;
+  margin-top: 10%;
+}
+
+.index_text p {
+  margin-top: 50px;
+  color: #4b4b4b;
+  font-size: 30px;
+  width: 55%;
+  line-height: 30px;
+}
+
+.index-block button {
+  margin-top: 50px;
+  border-radius: 42px;
+  font-size: 30px;
+  width: 369px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.index_img {
+  height: 60vh;
+  width: 45vw;
+  margin-left: 30%;
+  opacity: 1;
+  animation: fade-in-animation 3.5s ease;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  stroke: black;
+  stroke-width: 111px;
+  object-fit: cover;
+}

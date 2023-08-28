@@ -1,0 +1,77 @@
+.subject-statisctics-title {
+    font-size: 30px;
+    margin-top: 15px;
+    transition-duration: 0.2s;
+    margin-bottom: 20px;
+}
+
+.table {
+    margin-top: 20px;
+    border: 1px solid gray;
+    width: fit-content;
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    color: black;
+}
+
+th:first-child {
+    border-top-left-radius: 10px;
+    text-align: left;
+    padding-left: 10px;
+    border: none;
+}
+
+
+th:last-child {
+    border-top-right-radius: 10px;
+    border: none;
+}
+
+td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+th {
+    padding: 10px;
+}
+
+tbody tr td:first-child {
+    padding-right: 100px;
+}
+
+.positive {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #ceedcb;
+    border: 2px solid #4fbd4c;
+    margin: auto;
+}
+
+.negative {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #ffacac;
+    border: 2px solid #ff0000;
+    margin: auto;
+}
+
+td {
+    padding: 10px;
+}
+
+tr:last-child {
+    border: none;
+}
+
+thead {
+    background-color: #ededed;
+}

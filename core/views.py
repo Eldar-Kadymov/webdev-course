@@ -8,7 +8,10 @@ from .forms import FeedbackForm
 class IndexView(View):
     def get(self, request):
         return render(request, 'core/index.html')
-
+    
+class AuthSelectView(View):
+    def get(self, request):
+        return render(request, 'core/auth_select.html')
 
 class FeedbackPopupView(View):
     template_name = 'core/feedback.html'

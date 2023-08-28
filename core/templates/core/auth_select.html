@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="auth_test">
+    <form class="form_1" >
+        <h1 class="form_title_1">Выберите вариант входа</h1>
+        <div class="column">
+            <button type="submit" class="form_button_2">
+                <a class="a_class" href="{% url 'students:login' %}">Я студент</a>
+            </button>
+            <button type="submit" class="form_button_2">
+                <a class="a_class" href="{% url 'teachers:login' %}">Я преподаватель</a>
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

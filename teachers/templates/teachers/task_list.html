@@ -1,18 +1,16 @@
-{% extends 'teachers/base.html' %}
+{% extends 'teachers/base_with_sidebar.html' %}
 
 {% block content %}
-<h1>Список заданий по предмету: {{ subject.name }}</h1>
-<h2><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></h2>
-<h2><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></h2>
-<br>
-<h2><a href="{% url 'teachers:task_add' subject.slug %}">Создать новое задание</a></h2>
-<ul>
+<div class="task-list-title">Список заданий по предмету: {{ subject.name }}</div>
+<span class="task-list-selector"><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></span>
+<span class="task-list-selector"><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></span>
+<div class="line"></div>
+<span class="task-list">Список заданий</span>
+<span><a href="{% url 'teachers:task_add' subject.slug %}"><button class="add-task">Добавить задание</button></a></span>
     {% for task in tasks %}
-        <li>
-            <a href="#" class="open-popup" data-task-url="{% url 'teachers:task_detail' task.slug %}">{{ task.title }}</a>
-        </li>
+            <a href="#" class="open-popup" data-task-url="{% url 'teachers:task_detail' task.slug %}"><div class="task">{{ task.title }}</div></a>  
     {% endfor %}
-</ul>
+
 
 
 <div id="popup" class="popup">

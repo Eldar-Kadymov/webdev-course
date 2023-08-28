@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from .views import (
     LoginView,
@@ -45,4 +47,4 @@ urlpatterns = [
     # Маршрут для создания нового задания
     path('subjects/<slug:subject_slug>/create_task/',
          CreateTaskView.as_view(), name='task_add'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

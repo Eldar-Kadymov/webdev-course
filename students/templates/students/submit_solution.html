@@ -1,4 +1,4 @@
-{% extends 'students/base.html' %}
+{% extends 'students/base_with_sidebar.html' %}
 
 {% block content %}
   <h2>{{ task.title }}</h2>
@@ -17,7 +17,7 @@
   var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
     lineNumbers: true,  // Показывать номера строк
     mode: "python",     // Режим подсветки синтаксиса Python
-    theme: "monokai"    // Тема Monokai
+    theme: "monokai"
   });
 </script>
 {% endblock %}

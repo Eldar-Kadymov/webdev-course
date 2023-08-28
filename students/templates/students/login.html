@@ -1,10 +1,21 @@
 {% extends 'students/base.html' %}
 
 {% block content %}
-  <h2>Авторизация студента</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Войти</button>
-  </form>
+  <div class="auth_test">
+    <form class="form_1" method="POST">
+        {% csrf_token %}
+        <h1 class="form_title_1">Авторизация студента</h1>
+        <div class="form_group_1">
+            {{form.username}}
+            <div class="form-error">{{form.username.errors}}</div>
+            <label class="form_label_1">Логин</label>
+        </div>
+        <div class="form_group_1">
+            {{form.password}}
+            <div class="form-error">{{form.password.errors}}</div>
+            <label class="form_label_1">Пароль</label>
+        </div>
+        <button type="submit" class="form_button_1">Войти</button>
+    </form>
+  </div>
 {% endblock %}

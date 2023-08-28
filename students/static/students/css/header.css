@@ -1,0 +1,70 @@
+.header {
+  position: sticky;
+  width: 100vw;
+  background-color: #0078D7;
+  display: flex;
+  line-height: 40px;
+  height: auto;
+  padding: 10px 0px;
+}
+
+.header-title {
+  color: #fff;
+  display: flex;
+  align-self: center;
+  font-size: 30px;
+  margin-left: 30px;
+  text-decoration: none;
+}
+
+.header-title:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-profile {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  align-items: center;
+}
+
+.header-profile-info {
+  font-size: 18px;
+  margin: 0 15px;
+  line-height: 25px;
+}
+
+.student-group {
+  color: lightgray;
+}
+
+.header-profile-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logout:hover {
+  background-color: #fff;
+  border-radius: 12px;
+  transition-duration: 0.5s;
+  color: #222222;
+  text-decoration: none;
+}
+
+.logout {
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
+  margin-right: 25px;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #fff;
+}

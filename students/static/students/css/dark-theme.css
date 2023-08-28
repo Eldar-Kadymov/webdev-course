@@ -1,0 +1,46 @@
+.sidebar ul li a {
+    color: white;
+}
+
+body {
+    background-color: #222222;
+    color: white;
+}
+
+.subject, .module, .task, .sidebar {
+    background-color: #343434;
+}
+
+.modules, .task-description {
+    color: #fff;
+}
+
+.bxs-moon {
+    color: #fff;
+}
+
+.bxs-sun {
+    color: lightgray;
+}
+
+.task {
+    color: #fff;
+}
+
+.task-list-selector a {
+    color: #fff;
+}
+
+.line {
+    background-color: #fff;
+}
+
+thead {
+    background-color: rgb(85, 85, 85);
+    color: #fff;
+}
+
+tbody {
+    color: #fff;
+    background-color: rgb(34, 34, 34);
+}

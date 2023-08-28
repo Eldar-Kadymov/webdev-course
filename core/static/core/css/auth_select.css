@@ -1,0 +1,57 @@
+.auth_test {
+    position:fixed;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.form_1 {
+    width: 500px;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #ccc;
+    font-family: 'rega';
+    letter-spacing: 1px;
+    z-index: -2;
+    background-color: #fff;
+}
+
+.form_1 .column {
+    display: flex;
+    column-gap: 15px;
+}
+
+.form_title_1 {
+    text-align: center;
+    margin: 0 0 32px 0;
+    font-weight: normal;
+}
+
+.a_class {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: #fff
+}
+
+.a_class:hover {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: #fff
+}
+
+.form_button_2 {
+    height: 100%;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #0071f0;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}

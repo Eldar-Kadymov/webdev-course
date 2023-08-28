@@ -1,44 +1,36 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>web-course</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css">
-
-  <style>
-    .CodeMirror {
-    font-size: 16px; 
-    width: 1000px;
-    height: 500px;
-  }
-
-  .progress-bar {
-  width: 500px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 10px;
-  margin-top: 5px;
-}
-
-.progress {
-  height: 100%;
-  background-color: #4caf50;
-  border-radius: 10px;
-  transition: width 0.3s ease-in-out;
-}
-  </style>
-</head>
+  <title>{% block title %}E-learning{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="{% static 'students/css/sidebar.css' %}" />
+  <link rel="stylesheet" href="{% static 'students/css/subject_list.css' %}" />
+  <link rel="stylesheet" href="{% static 'students/css/base.css'%}" />
+  <link rel="stylesheet" href="{% static 'students/css/sidebar.css'%}" />
+  <link rel="stylesheet" href="{% static 'students/css/header.css'%}" />
+  <link rel="stylesheet" href="{% static 'students/css/task_list.css'%}" />
+  <link rel="stylesheet" href="{% static 'students/css/login.css'%}" />
+</head> 
 <body>
-    <header>
-        <h1>страницы студента</h1>
-    </header>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+  <header class="header fixed-top">
+    <a class="header-title" href="/">Elearning</a>
+    {% if request.user.is_authenticated %}
+    <div class="header-profile">
+      <img class="header-profile-avatar" src="{{ student.avatar.url }}"></img>
+      <div class="header-profile-info">
+        <div class="student">
+          {{ student.first_name }} {{ student.last_name }}
+        </div>
+      </div>
+      <a class="logout" href="{% url 'students:logout' %}">
+        <i class="bx bx-log-out"></i>
+      </a>
+    </div>
+    {% endif %}
+  </header>
+    {% block content %}{% endblock %}
 </body>
 </html>

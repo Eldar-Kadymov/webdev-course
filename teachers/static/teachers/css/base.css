@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "rega";
+  src: url("../fonts/rega.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "rega";
+}
+
+body {
+  background-color: #f4f4f4;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  transition-duration: 0.2s;
+}
+
+main {
+  margin-left: 560px;
+  margin-right: 440px;
+  position: relative;
+  height: 100%;
+}
+
+aside {
+  top: 13%;
+  position: fixed;
+  height: 100%;
+  width: 400px;
+  background-color: lightcoral;
+  right: 0;
+}

@@ -64,7 +64,8 @@ class SubjectListView(View):
 
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         subjects = Subject.objects.all()
-        context = {'subjects': subjects}
+        teacher = request.user.teacher
+        context = {'subjects': subjects, 'teacher': teacher}
         return render(request, self.template_name, context)
 
 

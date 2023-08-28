@@ -5,7 +5,7 @@ from .models import Subject, Task, Submission
 # Регистрация модели Subject в админской панели
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
+    list_display = ('name', 'slug', 'image')
 
     # Поле slug будет автоматически заполняться на основе значения поля name
     prepopulated_fields = {"slug": ("name", )}

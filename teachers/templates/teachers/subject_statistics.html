@@ -1,27 +1,10 @@
-{% extends 'teachers/base.html' %}
+{% extends 'teachers/base_with_sidebar.html' %}
 
 {% block content %}
-<style>
-    .table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.table th, .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.table th {
-    background-color: #f2f2f2;
-}
-</style>
-<h1>Статистика по предмету: {{ subject.name }}</h1>
-<h2><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></h2>
-<h2><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></h2>
-
-
+<div class="subject-statisctics-title">Статистика по предмету: {{ subject.name }}</div>
+<span class="task-list-selector"><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></span>
+<span class="task-list-selector"><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></span>
+<div class="line"></div>
 <form method="GET" action="{% url 'teachers:subject_statistics' subject.slug %}">
     <label for="search_student">Поиск студента: </label>
     <input type="text" name="search_student" id="search_student" value="{{ search_student }}">
@@ -35,37 +18,38 @@
     <p>Студент не найден.</p>
 {% endif %}
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Студент</th>
-            {% for task in tasks %}
-                <th>{{ task.title }}</th>
-            {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for student, statistics in student_statistics.items %}
-        <tr>
-            <td>{{ student.get_full_name }}</td>
-            {% for submission_id in statistics %}
-                <td>
-                    {% if submission_id != None %}
-                        <a href="{% url 'teachers:view_submission' submission_id=submission_id %}">
-                            {% if submission_id %}
-                                <span class="positive">+</span>
-                            {% else %}
-                                <span class="negative">-</span>
-                            {% endif %}
-                        </a>
-                    {% else %}
-                        <span class="negative">-</span>
-                    {% endif %}
-                </td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="table">
+    <table>
+        <thead>
+            <tr>
+                <th>Студент</th>
+                {% for task in tasks %}
+                    <th>{{ task.title }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for student, statistics in student_statistics.items %}
+            <tr>
+                <td class="name">{{ student.get_full_name }}</td>
+                {% for submission_id in statistics %}
+                    <td>
+                        {% if submission_id != None %}
+                            <a href="{% url 'teachers:view_submission' submission_id=submission_id %}">
+                                {% if submission_id %}
+                                    <div class="positive"></div>
+                                {% else %}
+                                    <div class="negative"></div>
+                                {% endif %}
+                            </a>
+                        {% else %}
+                            <div class="negative"></div>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

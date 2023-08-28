@@ -64,7 +64,6 @@ class SubjectListView(View):
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         subjects = Subject.objects.all()
         student = request.user.student
-
         subject_data = []
         for subject in subjects:
             tasks_in_subject = Task.objects.filter(subject=subject)

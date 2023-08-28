@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}E-learning{% endblock %}</title>
+   <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+  crossorigin="anonymous"
+/>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="{% static 'teachers/css/subject_list.css' %}" />
+  <link rel="stylesheet" href="{% static 'teachers/css/base.css'%}" />
+  <link rel="stylesheet" href="{% static 'teachers/css/sidebar.css'%}" />
+  <link rel="stylesheet" href="{% static 'teachers/css/header.css'%}" />
+  <link rel="stylesheet" href="{% static 'teachers/css/task_list.css'%}" />
+  <link rel="stylesheet" href="{% static 'teachers/css/subject_statisctics.css'%}" />
+  <link rel="stylesheet" href="" id="theme" />
+</head> 
+<body>
+  <header class="header fixed-top">
+    <a class="header-title" href="/">Elearning</a>
+    {% if request.user.is_authenticated %}
+    <div class="header-profile">
+      <div class="header-profile-info">
+          {{ teacher.first_name }} {{ teacher.last_name }}
+      </div>
+      <a class="logout" href="{% url 'teachers:logout' %}">
+        <i class="bx bx-log-out"></i>
+      </a>
+    </div>
+    {% endif %}
+  </header>
+  <nav class="sidebar">
+    <ul class="nav-link">
+      <li>
+        <a {% if section == "profile" %} class="selected" {% endif %} class="sidebar-link" href="#">
+          <i class="bx bx-user-circle"></i>
+          <span>Профиль</span>
+        </a>
+      </li>
+      <li>
+        <a {% if section == "subjects" %} class="selected" {% endif %} class="sidebar-link" href="{% url 'teachers:subject_list' %}">
+          <i class="bx bx-book"></i>
+          <span>Предметы</span>
+        </a>
+      </li>
+      <!-- <li >
+        <a class="sidebar-link" href="#">
+          <i class="bx bx-conversation"></i>
+          <span>Форум</span>
+        </a>
+      </li> -->
+    </ul>
+    <label class="switch">
+      <input onclick="changeTheme()" type="checkbox">
+      <span class="slider"></span>
+      <i class='bx bxs-sun'></i>
+      <i class='bx bxs-moon' ></i>
+    </label>
+    <script>
+      let theme = document.getElementById("theme");
+      function changeTheme() {
+        if (theme.getAttribute("href") === "") {
+        theme.href = "{% static 'students/css/dark-theme.css'%}";
+        localStorage.setItem("theme", "{% static 'students/css/dark-theme.css'%}");
+        }
+        else {
+        theme.href = "";
+        localStorage.setItem("theme", "");
+        }
+      }
+      let activeTheme = localStorage.getItem("theme");
+      if (activeTheme === null || activeTheme === "") {
+        theme.href = activeTheme;
+      }
+      else if (activeTheme === "{% static 'students/css/dark-theme.css'%}") {
+        theme.href = activeTheme;
+        document.querySelector("input[type=checkbox]").checked = true;
+      }
+    </script>
+  </nav>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
