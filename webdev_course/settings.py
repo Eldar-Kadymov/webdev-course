@@ -1,9 +1,15 @@
 import os
 from pathlib import Path
+from .utils import get_git_version
 
 # Определение базовой директории проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Версия проекта
+PROJECT_VERSION = '1.0.0'
+
+# Версия проекта для локальной разработки
+VERSION = get_git_version()
 
 # Настройки безопасности
 SECRET_KEY = 'django-insecure-r&r9qi8%dem9bq0)y5$epsp@2aa@loj806^o0%cag$%#2l$09j'
@@ -58,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'webdev_course.context_processors.current_year',
+                'webdev_course.context_processors.project_version',
             ],
         },
     },

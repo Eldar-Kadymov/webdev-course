@@ -5,51 +5,41 @@
 <span class="task-list-selector"><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></span>
 <span class="task-list-selector"><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></span>
 <div class="line"></div>
-<form method="GET" action="{% url 'teachers:subject_statistics' subject.slug %}">
-    <label for="search_student">Поиск студента: </label>
-    <input type="text" name="search_student" id="search_student" value="{{ search_student }}">
-    <input type="submit" value="Поиск">
-    {% if search_student %}
-        <a href="{% url 'teachers:subject_statistics' subject.slug %}" class="btn btn-secondary">Сбросить поиск</a>
-    {% endif %}
-</form>
 
-{% if search_student and not student_statistics %}
-    <p>Студент не найден.</p>
-{% endif %}
 
 <div class="table">
-    <table>
-        <thead>
-            <tr>
-                <th>Студент</th>
-                {% for task in tasks %}
-                    <th>{{ task.title }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for student, statistics in student_statistics.items %}
-            <tr>
-                <td class="name">{{ student.get_full_name }}</td>
-                {% for submission_id in statistics %}
-                    <td>
-                        {% if submission_id != None %}
-                            <a href="{% url 'teachers:view_submission' submission_id=submission_id %}">
-                                {% if submission_id %}
-                                    <div class="positive"></div>
-                                {% else %}
-                                    <div class="negative"></div>
-                                {% endif %}
-                            </a>
-                        {% else %}
-                            <div class="negative"></div>
-                        {% endif %}
-                    </td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div id="dataGrid" class="data-grid"></div>
 </div>
+
+<script>
+    const studentsData = JSON.parse('{{ students_data_json|escapejs|safe }}');
+
+    
+    $(function() {
+        $("#dataGrid").dxDataGrid({
+            dataSource: studentsData,
+            columns: [
+                { 
+                dataField: "student", 
+                caption: "Студент",
+                width: 300,
+                },
+                ...studentsData[0].assignments.map((assignment, index) => ({
+                    dataField: `assignments[${index}].completed`,
+                    caption: assignment.name,
+                    dataType: "boolean",
+                    width: 150,
+                })),
+            ],
+            filterRow: { visible: true },
+            searchPanel: { visible: true },
+            scrolling: {
+                mode: "standard"
+            },
+            selection: {
+                mode: "single" // or "multiple" | "none"
+            }
+        });
+    });
+</script>
 {% endblock %}

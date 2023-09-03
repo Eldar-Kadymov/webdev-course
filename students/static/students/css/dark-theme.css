@@ -34,13 +34,3 @@ body {
 .line {
     background-color: #fff;
 }
-
-thead {
-    background-color: rgb(85, 85, 85);
-    color: #fff;
-}
-
-tbody {
-    color: #fff;
-    background-color: rgb(34, 34, 34);
-}

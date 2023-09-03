@@ -13,6 +13,7 @@ from students.models import Student
 from .forms import LoginForm
 from core.forms import TaskForm
 from .decorators import teacher_required
+from django.conf import settings
 
 
 class LoginView(View):
@@ -77,35 +78,39 @@ class SubjectStatisticsView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request: HttpRequest, subject_slug: str, *args, **kwargs) -> HttpResponse:
-        subject = Subject.objects.get(slug=subject_slug)
-        students = Student.objects.all()
+        subject = get_object_or_404(Subject, slug=subject_slug)
         tasks = subject.task_set.all()
+        students = Student.objects.all()
 
-        search_student = request.GET.get('search_student', '')
-
-        student_statistics = {}
+        students_data = []
 
         for student in students:
-            if search_student and search_student.lower() not in student.get_full_name().lower():
-                continue
-
-            student_stats = []
+            student_info = {
+                "student": student.get_full_name(),
+                "assignments": []
+            }
 
             for task in tasks:
                 submission = Submission.objects.filter(
-                    task=task,
-                    student=student
-                ).first()
+                    student=student, task=task).first()
 
-                student_stats.append(submission.id if submission else None)
+                completed = False
+                if submission:
+                    completed = submission.is_correct
 
-            student_statistics[student] = student_stats
+                student_info['assignments'].append({
+                    'name': task.title,
+                    'completed': completed
+                })
+
+            students_data.append(student_info)
+
+        students_data_json = json.dumps(students_data)
 
         context = {
             'subject': subject,
-            'student_statistics': student_statistics,
+            'students_data_json': students_data_json,
             'tasks': tasks,
-            'search_student': search_student,
         }
         return render(request, self.template_name, context)
 
