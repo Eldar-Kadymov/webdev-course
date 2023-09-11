@@ -1,19 +1,22 @@
 {% extends 'teachers/base_with_sidebar.html' %}
 
 {% block content %}
-<div class="subject-list-title">Список предметов</div>
-      <div class="subject-list">
-        {% for subject in subjects %}
-        
-            <a class="nav-link" href="{% url 'teachers:task_list' subject.slug %}">
-              <article class="subject">
-                  <div class="subject-name">
-                    {{ subject.name }}
-                  </div>
-                  <img class="subject-logo" src="{{ subject.image.url }}" alt="{{ subject.name }} Image">
-              </article>
-            </a>
-        
-        {% endfor %}
-      </div>
+<br>
+<a href="#" class="task-nav-item">Список предметов</a>
+<section class="subject-list-window">
+  <div class="subject-list-title">Список предметов</div>
+  <div class="subject-list-line"></div>
+        <div class="subject-list">
+          {% for subject in subjects %}          
+              <a class="nav-link" href="{% url 'teachers:task_list' subject.slug %}">
+                <article class="subject">
+                    <div class="subject-name">
+                      {{ subject.name }}
+                    </div>
+                    <img class="subject-logo" src="{{ subject.image.url }}" alt="{{ subject.name }} Image">
+                </article>
+              </a>
+            {% endfor %}
+          </div>
+</section>
 {% endblock %}

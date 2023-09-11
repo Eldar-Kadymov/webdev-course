@@ -1,7 +1,8 @@
 .subject-list-title {
-  font-size: 30px;
-  margin-top: 15px;
+  font-size: 25px;
   transition-duration: 0.2s;
+  margin-left: 60px;
+  font-weight: bold;
 }
 
 @keyframes scaling {
@@ -15,25 +16,44 @@
   }
 }
 
+.subject-list-window {
+  margin-top: 20px;
+  background-color: #fff;
+  height: 630px;
+  width: 1110px;
+  border-radius: 20px;
+  padding-top: 20px;
+}
+
+.subject-list-line {
+  background-color: #B4B4B4;
+  height: 2px;
+  width: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
 .subject-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 1000px;
+  height: auto;
+  margin-left: 77px;
 }
 
 .subject {
   animation: scaling 0.5s ease;
   position: relative;
-  height: 135px;
-  width: 475px;
+  height: auto;
+  width: 460px;
+  height: 130px;
   background-color: #fff;
-  border: 1px solid #acacac;
-  margin: 12px;
+  border: 1px solid #d4d4d6;
+  margin: 10px;
   border-radius: 30px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   transition-duration: 0.2s;
-  padding-bottom: 10px;
 }
 
 .subject:hover {
@@ -44,7 +64,7 @@
   margin: 10px 15px;
   display: flex;
   height: 50px;
-  width: 800px;
+  width: auto;
   flex-direction: column;
   justify-content: space-between;
   line-height: 25px;
@@ -55,31 +75,8 @@
 .subject-logo {
   position: absolute;
   right: 0;
-  bottom: 15%;
-  margin-right: 30px;
-  height: 100px;
-  width: 100px;
-}
-
-.progress-score {
-  margin-left: 15px;
-}
-
-.progress-bar {
-  margin-left: 15px;
-}
-
-.progress-bar {
-  width: 300px;
-  height: 15px;
-  background-color: #ccc;
-  border-radius: 10px;
-  margin-top: 5px;
-}
-
-.progress {
-  height: 100%;
-  background-color: #4caf50;
-  border-radius: 10px;
-  transition: width 0.3s ease-in-out;
+  bottom: 27%;
+  margin-right: 40px;
+  height: 60px;
+  width: 60px;
 }
