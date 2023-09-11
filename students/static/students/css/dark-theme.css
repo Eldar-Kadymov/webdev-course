@@ -1,36 +1,65 @@
 .sidebar ul li a {
     color: white;
+    background-color: #333;
+}
+
+.header {
+    background-color: #151515;
+    border-bottom-color: #444;
+}
+
+
+
+.bx-sun {
+    background-color: #4A350D;
 }
 
 body {
-    background-color: #222222;
+    background-color: #151515;
     color: white;
 }
 
 .subject, .module, .task, .sidebar {
-    background-color: #343434;
+    background-color: #262626;
 }
 
 .modules, .task-description {
     color: #fff;
 }
 
-.bxs-moon {
+.task-nav-item:hover {
+    background-color: #092547;
+  }
+
+.task-list-selector a, .task, .submit-task-list, .task-title, .description, .header-profile-info, .logout {
     color: #fff;
 }
 
-.bxs-sun {
-    color: lightgray;
-}
-
-.task {
-    color: #fff;
-}
-
-.task-list-selector a {
-    color: #fff;
+.logout:hover {
+    background-color: #fff;
+    color: black;
 }
 
 .line {
-    background-color: #fff;
+    background-color: #444;
+}
+
+.tasks {
+    background-color: #0C0C0C;
+}
+
+.submit-tasks {
+    background-color: #1C1C1C;
+}
+
+.task-info, .CodeMirror {
+    border: 2px solid #3f3f3f;
+}
+
+.tasks {
+    border-right: 2px solid #3f3f3f;
+}
+
+.task-submit {
+    border-top: 2px solid #3f3f3f;
 }

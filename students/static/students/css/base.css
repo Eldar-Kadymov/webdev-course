@@ -11,7 +11,7 @@
 }
 
 body {
-  background-color: #f4f4f4;
+  background-color: #efefef;
   position: relative;
   min-height: 100vh;
   width: 100%;
@@ -20,17 +20,7 @@ body {
 }
 
 main {
-  margin-left: 560px;
-  margin-right: 440px;
+  margin-left: 470px;
   position: relative;
   height: 100%;  
-}
-
-aside {
-  top: 13%;
-  position: fixed;
-  height: 100%;
-  width: 400px;
-  background-color: lightcoral;
-  right: 0;
 }

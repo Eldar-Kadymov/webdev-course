@@ -1,6 +1,35 @@
+.subject-statisctics {
+    background-color: #fff;
+    height: 630px;
+    width: 1110px;
+    border-radius: 20px;
+    padding-top: 15px;
+}
+
 .subject-statisctics-title {
-    font-size: 30px;
-    margin-top: 15px;
+    font-size: 25px;
     transition-duration: 0.2s;
     margin-bottom: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.subject-statisctics-line {
+    background-color: #B4B4B4;
+    height: 2px;
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+.dx-datagrid-headers {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.dx-datagrid {
+    border-radius: 20px;
+    margin-left: 60px;
 }

@@ -1,32 +1,33 @@
 {% extends 'teachers/base_with_sidebar.html' %}
 
 {% block content %}
-<h1>Создание задания</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="subject" value="{{ subject.id }}">
-    
-    <div id="tests-container">
-        <div class='test-block'>
-            <div class='test-name'>
-                <p>Тест №1</p>
-            </div>
-            <div class='test-form'>
-                <label for="input_0">Входные данные:</label>
-                <input type="text" name="input_0" required>
-                <label for="output_0">Выходные данные:</label>
-                <input type="text" name="output_0" required>
+<div class="task-add">
+    <p class="task-add-title">Создание задания</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="subject" value="{{ subject.id }}">
+        
+        <div id="tests-container">
+            <div class='test-block'>
+                <div class='test-name'>
+                    <div>Тест №1</div>
+                </div>
+                <div class='test-form'>
+                    <label for="input_0">Входные данные:</label>
+                    <div><input class="input" type="text" name="input_0" required></div>
+                    <label for="output_0">Выходные данные:</label>
+                    <div><input class="input" type="text" name="output_0" required></div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <input type="hidden" name="test_count" id="id_test_count" value="1">
-    
-    <button type="button" id="add-test-button">Добавить тест</button>
-    <button type="submit">Создать задание</button>
-</form>
-
+        
+        <input type="hidden" name="test_count" id="id_test_count" value="1">
+        
+        <button class="add-test-button" type="button" id="add-test-button">Добавить тест</button>
+        <button class="add-task-button" type="submit">Создать задание</button>
+    </form>
+</div>
 <script>
     // Счетчик тестов
     let testCount = 1;
@@ -49,15 +50,16 @@
         const testBlock = document.createElement('div');
         testBlock.classList.add('test-block');
         testBlock.innerHTML = `
+        <i class='bx bx-x delete-test-button' ></i>
             <div class='test-name'>
                 <p>Тест №${testCount + 1}</p>
             </div>
+            
             <div class='test-form'>
                 <label for="input_${testCount}">Входные данные:</label>
-                <input type="text" name="input_${testCount}" required>
+                <div><input class="input" type="text" name="input_${testCount}" required></div>
                 <label for="output_${testCount}">Выходные данные:</label>
-                <input type="text" name="output_${testCount}" required>
-                <button type="button" class="delete-test-button">Удалить</button>
+                <div><input class="input" type="text" name="output_${testCount}" required></div>
             </div>
         `;
 
@@ -86,5 +88,15 @@
         }
     });
 </script>
-
+<script> 
+    var tx = document.getElementsByTagName('textarea');
+    for (var i = 0; i < tx.length; i++) {
+    tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+    tx[i].addEventListener("input", OnInput, false);
+    }
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';;
+    }
+</script>
 {% endblock %}

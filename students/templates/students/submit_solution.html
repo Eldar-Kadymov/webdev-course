@@ -1,23 +1,38 @@
 {% extends 'students/base_with_sidebar.html' %}
 
 {% block content %}
-  <h2>{{ task.title }}</h2>
-  {{ task.description }}
-
-  <p>Ваше решение:</p>
-  <form method="post">
-    {% csrf_token %}
-    <textarea id="code-editor" name="code">{{ form.code.value|default:'' }}</textarea>
-    <button type="submit">Submit</button>
-  </form>
-
+<div class="task-navbar">
+  <a href="#" class="task-nav-item">Список предметов</a>
+  <span class="task-arrow">></span>
+  <a href="#" class="task-nav-item">Список предметов</a>
+</div>
+<section class="task-info">
+  <aside class="tasks">
+    <p class="submit-task-name">Название предмета</p>
+    <p class="submit-task-list">Список заданий</p>
+    <div class="submit-tasks">Название задания <div class="task-indicator"></div></div> 
+    <div class="submit-tasks">Название задания <div class="task-indicator-done"></div></div> 
+  </aside>
+  <div class="task-detail">
+    <p class="task-title">{{ task.title }}. <span class="task-status">не решено</span></p>
+    <div class="task-submit">
+      <div class="description">Описание</div>
+      <div class="task-description">{{ task.description }}</div>
+      <form method="post">
+        {% csrf_token %}
+        <textarea id="code-editor" name="code">{{ form.code.value|default:'' }}</textarea>
+        <button class="submit-button" type="submit">Отправить решение</button>
+      </form>
+    </div>
+  </div>
+</section>
 
 <script>
   // Создаем редактор CodeMirror из элемента textarea
-  var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
     lineNumbers: true,  // Показывать номера строк
     mode: "python",     // Режим подсветки синтаксиса Python
-    theme: "monokai"
-  });
+    theme: "default"
+  })  
 </script>
 {% endblock %}

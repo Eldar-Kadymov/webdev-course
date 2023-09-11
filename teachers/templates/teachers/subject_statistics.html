@@ -1,16 +1,22 @@
 {% extends 'teachers/base_with_sidebar.html' %}
 
 {% block content %}
-<div class="subject-statisctics-title">Статистика по предмету: {{ subject.name }}</div>
-<span class="task-list-selector"><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></span>
-<span class="task-list-selector"><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></span>
-<div class="line"></div>
-
-
-<div class="table">
-    <div id="dataGrid" class="data-grid"></div>
-</div>
-
+<div class="task-navbar">
+    <a href="#" class="task-nav-item">Список предметов</a>
+    <span class="task-arrow">></span>
+    <a href="#" class="task-nav-item">Список предметов</a>
+    <span class="task-arrow">></span>
+    <a href="#" class="task-nav-item">Список предметов</a>
+  </div>
+<section class="subject-statisctics">
+    <div class="subject-statisctics-title">{{ subject.name }}</div>
+    <span class="task-list-selector"><a href="{% url 'teachers:task_list' subject.slug %}">Список заданий</a></span>
+    <span class="task-list-selector"><a href="{% url 'teachers:subject_statistics' subject.slug %}">Статистика студентов</a></span>
+    <div class="subject-statisctics-line"></div>
+    <div class="table">
+        <div id="dataGrid" class="data-grid"></div>
+    </div>
+</section>
 <script>
     const studentsData = JSON.parse('{{ students_data_json|escapejs|safe }}');
 
@@ -32,7 +38,8 @@
                 })),
             ],
             filterRow: { visible: true },
-            searchPanel: { visible: true },
+            searchPanel: { visible: false },
+            showBorders: true,
             scrolling: {
                 mode: "standard"
             },

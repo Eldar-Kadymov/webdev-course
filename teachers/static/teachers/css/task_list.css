@@ -6,22 +6,33 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
 }
 
 .popup-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    background-color: #fafafa;
+    margin: 10% auto;
     border: 1px solid #888;
-    width: 80%;
+    width: 51%;
+    border-radius: 20px;
 }
 
 .close-popup {
-    color: #aaa;
+    display: flex;
+    align-items: center;
+    color: #fff;
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    margin-right: 0px;
+    background-color: #bdbdbd;
+    padding-left: 20px;
+    width: 60px;
+    height: 30px;
+    top: 30px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
 .close-popup:hover {
@@ -41,16 +52,8 @@
     text-decoration: none;
     color: black;
     margin-right: 20px;
-    margin-left: 20px;
+    margin-left: 40px;
     font-size: 15px;
-}
-
-.line {
-    height: 2px;
-    background-color: black;
-    width: auto;
-    opacity: 0.3;
-    margin-bottom: 30px;
 }
 
 .task-list {

@@ -1,15 +1,32 @@
 {% block content %}
-<h1>{{ task.subject }} - {{ task.title }}</h1>
-<p class="task-description">{{ task.description }}</p>
-
-<h2>Тесты:</h2>
-{% for test in tests %}
-    {% if task.test_code %}
-        <h2>Код для тестирования:</h2>
-        <pre>{{ task.test_code }}</pre>
-    {% endif %}
-    <h3>Тест {{ forloop.counter }}</h3>
-    <p><strong>Ожидаемый ввод:</strong> {{ test.input | safe }}</p>
-    <p><strong>Ожидаемый вывод:</strong> {{ test.output | safe }}</p>
-{% endfor %}
+<p class="popup-title">{{ task.subject }} - {{ task.title }}</p>
+<div class="popup-description">Описание</div>
+<textarea cols="120" disabled class="popup-task-description">{{ task.description }}</textarea> 
+<div class="popup-tests">Тестовые данные</div>
+<div class="tests">
+    {% for test in tests %}
+        {% if task.test_code %}
+            <h2>Код для тестирования:</h2>
+            <pre>{{ task.test_code }}</pre>
+        {% endif %}
+        <div class="test">
+            <div class="test-name">Тест №{{ forloop.counter }}</div>
+            <p>Ожидаемый ввод:</p>
+            <textarea class="test-input" disabled rows="1" cols="50">{{ test.input | safe }}</textarea>
+            <p>Ожидаемый вывод:</p>
+            <textarea disabled class="test-output" cols="50" rows="1">{{ test.output | safe }}</textarea>
+        </div>
+    {% endfor %}
+</div>
+<script> 
+    var tx = document.getElementsByTagName('textarea');
+    for (var i = 0; i < tx.length; i++) {
+    tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+    tx[i].addEventListener("input", OnInput, false);
+    }
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';;
+    }
+</script>
 {% endblock %}

@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/ayu-dark.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="{% static 'students/css/sidebar.css' %}" />
   <link rel="stylesheet" href="{% static 'students/css/subject_list.css' %}" />
@@ -38,9 +38,10 @@
 </head> 
 <body>
   <header class="header fixed-top">
-    <a class="header-title" href="/">Elearning</a>
+    
     {% if request.user.is_authenticated %}
     <div class="header-profile">
+      <i onclick="changeTheme()" class='bx bx-moon'></i>
       <img class="header-profile-avatar" src="{{ student.avatar.url }}"></img>
       <div class="header-profile-info">
           {{ student.first_name }} {{ student.last_name }}
@@ -52,6 +53,7 @@
     {% endif %}
   </header>
   <nav class="sidebar">
+    <p class="sidebar-title">E-learning</p>
     <ul class="nav-link">
       <li>
         <a {% if section == "profile" %} class="selected" {% endif %} class="sidebar-link" href="#">
@@ -65,45 +67,49 @@
           <span>Предметы</span>
         </a>
       </li>
-      <!-- <li >
+      <li >
         <a class="sidebar-link" href="#">
           <i class="bx bx-conversation"></i>
           <span>Форум</span>
         </a>
-      </li> -->
+      </li>
+      <li class="support">
+        <a class="sidebar-link" href="#">
+          <i class="bx bx-support"></i>
+          <span>Поддержка</span>
+        </a>
+      </li>
     </ul>
-    <label class="switch">
-      <input onclick="changeTheme()" type="checkbox">
-      <span class="slider"></span>
-      <i class='bx bxs-sun'></i>
-      <i class='bx bxs-moon' ></i>
-    </label>
-    <p>&copy; {{ current_year }} E-learning</p>
-    <p>Version: {{ project_version }}</p>
-    <script>
-      let theme = document.getElementById("theme");
-      function changeTheme() {
-        if (theme.getAttribute("href") === "") {
-        theme.href = "{% static 'students/css/dark-theme.css'%}";  
-        localStorage.setItem("theme", "{% static 'students/css/dark-theme.css'%}");
-        }
-        else {
-        theme.href = "";
-        localStorage.setItem("theme", "");
-        }
-      }
-      let activeTheme = localStorage.getItem("theme");
-      if (activeTheme === null || activeTheme === "") {
-        theme.href = activeTheme;
-      }
-      else if (activeTheme === "{% static 'students/css/dark-theme.css'%}") {
-        theme.href = activeTheme;
-        document.querySelector("input[type=checkbox]").checked = true;
-      }
-    </script>
+    <div class="line"></div>
+    <span class="year">&copy; {{ current_year }}<span class="copyright"> E-learning</span></span>
+    <span class="version">Версия: {{ project_version }}</span>
   </nav>
   <main>
     {% block content %}{% endblock %}
   </main>
+  <script>
+    let theme = document.getElementById("theme");
+    function changeTheme() {
+      if (theme.getAttribute("href") === "") {
+      theme.href = "{% static 'students/css/dark-theme.css'%}";  
+      document.querySelector("i").classList.replace("bx-moon", "bx-sun");
+      localStorage.setItem("theme", "{% static 'students/css/dark-theme.css'%}");
+      }
+      else {
+      theme.href = "";
+      document.querySelector("i").classList.replace("bx-sun", "bx-moon")
+      localStorage.setItem("theme", "");
+      }
+    }
+    let activeTheme = localStorage.getItem("theme");
+    if (activeTheme === null || activeTheme === "") {
+      theme.href = activeTheme;
+      document.querySelector("i").classList.replace("bx-sun", "bx-moon")
+    }
+    else if (activeTheme === "{% static 'students/css/dark-theme.css'%}") {
+      theme.href = activeTheme;
+      document.querySelector("i").classList.replace("bx-moon", "bx-sun")
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,59 @@
+.task-add {
+    height: auto;
+    width: auto;
+    background-color: #fafafa;
+    border: 1px solid black;
+    border-radius: 12px;
+    margin-top: 30px;
+    padding: 20px;
+
+}
+
+.task-add-title {
+    font-size: 30px;
+}
+
+.test-block {
+    height: fit-content;
+    width: fit-content;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.input {
+    width: 400px;
+    padding-left: 10px;
+}
+
+.add-test-button {
+    background-color: #0078D7;
+    color: #fff;
+    border-radius: 12px;
+    padding: 2px 15px;
+    border: none;
+}
+
+.add-task-button {
+    background-color: rgb(48, 163, 48);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2px 15px;
+    border: none;
+    float: right;
+}
+
+.delete-test-button {
+    position: relative;
+    float: right;
+    border: none;
+    background-color: inherit;
+    font-size: 30px;
+    bottom: 10px;
+    left: 10px;
+    cursor: pointer;
+}
