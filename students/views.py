@@ -66,6 +66,7 @@ class SubjectListView(View):
         student = request.user.student
         subject_data = []
         for subject in subjects:
+            first_task = Task.objects.filter(subject=subject).first()
             tasks_in_subject = Task.objects.filter(subject=subject)
             completed_tasks = Submission.objects.filter(task__in=tasks_in_subject, student=student, is_correct=True).count()
             total_tasks = tasks_in_subject.count()
@@ -73,24 +74,10 @@ class SubjectListView(View):
                 completion_percentage = int((completed_tasks / total_tasks) * 100)
             else:
                 completion_percentage = 0
-            subject_data.append({'subject': subject, 'completion_percentage': completion_percentage})
+            subject_data.append({'first_task': first_task, 'subject': subject, 'completion_percentage': completion_percentage})
+
 
         context = {'subject_data': subject_data, 'student': student}
-        return render(request, self.template_name, context)
-
-
-class TaskListView(View):
-    template_name: str = 'students/task_list.html'
-
-    @method_decorator(student_required)
-    def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request: HttpRequest, subject_slug: str, *args, **kwargs) -> HttpResponse:
-        subject = get_object_or_404(Subject, slug=subject_slug)
-        tasks = Task.objects.filter(subject=subject)
-        student = request.user.student
-        context = {'subject': subject, 'student': student, 'tasks': tasks}
         return render(request, self.template_name, context)
 
 
@@ -101,7 +88,8 @@ class SubmitSolutionView(View):
     def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request: HttpRequest, task_slug: str, *args, **kwargs) -> HttpResponse:
+    def get(self, request: HttpRequest, subject_slug:str, task_slug: str, *args, **kwargs) -> HttpResponse:
+        subject = get_object_or_404(Subject, slug=subject_slug)
         task = get_object_or_404(Task, slug=task_slug)
         student = request.user.student
         last_submission = student.submission_set.filter(task=task).last()
@@ -110,11 +98,20 @@ class SubmitSolutionView(View):
         if last_submission:
             initial_data['code'] = last_submission.code
 
+        completed_tasks = []
+        tasks = Task.objects.filter(subject=subject)
+        for task in tasks:
+            # Проверяем, есть ли у студента выполненное задание для данного предмета
+            submission = Submission.objects.filter(task=task, student=student, is_correct=True).first()
+            if submission:
+                completed_tasks.append(task)
+
         form = SubmissionForm(initial=initial_data)
-        context = {'student': student, 'form': form, 'task': task}
+        context = {'subject': subject, 'student': student, 'form': form, 'task': task, 'tasks': tasks, 'completed_tasks': completed_tasks}
         return render(request, self.template_name, context)
 
-    def post(self, request: HttpRequest, task_slug: str, *args, **kwargs) -> HttpResponse:
+    def post(self, request: HttpRequest, subject_slug:str, task_slug: str, *args, **kwargs) -> HttpResponse:
+        subject = get_object_or_404(Subject, slug=subject_slug)
         task = get_object_or_404(Task, slug=task_slug)
         student = request.user.student
 
@@ -134,6 +131,7 @@ class SubmitSolutionView(View):
             submission.save()
 
             result_context = {
+                'subject': subject,
                 'student': student,
                 'task': task,
                 'is_passed': is_passed,

@@ -44,7 +44,6 @@
 .task-list-title {
     font-size: 30px;
     margin-top: 15px;
-    transition-duration: 0.2s;
     margin-bottom: 20px;
 }
 
@@ -87,7 +86,6 @@
     padding-left: 10px;
     border: 1px solid #acacac;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    transition: 0.2s ease;
     font-weight: bold;
 }
 

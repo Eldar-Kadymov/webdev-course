@@ -10,7 +10,6 @@
   margin-left: 10px;
   border-radius: 12px;
   background: #e4e4e4;
-  transition-duration: 0.2s;
 }
 
 .sidebar-title {
@@ -48,14 +47,12 @@
 }
 
 .sidebar ul li a {
-  transition-duration: 0.2s;
   background-color: #d9d9d9;
 }
 
 .sidebar ul li a:hover {
   background: #fff;
   color: #222222;
-  transition-duration: 0.5s;
   text-decoration: none;
 }
 
@@ -113,7 +110,6 @@
   bottom: 5px;
   left: 5px;
   background-color: #fff;
-  transition: 0.4s;
 }
 
 .switch input:checked + .slider {

@@ -20,7 +20,6 @@
 <script>
     const studentsData = JSON.parse('{{ students_data_json|escapejs|safe }}');
 
-    
     $(function() {
         $("#dataGrid").dxDataGrid({
             dataSource: studentsData,

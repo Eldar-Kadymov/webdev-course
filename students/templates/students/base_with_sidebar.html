@@ -25,15 +25,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/ayu-dark.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="{% static 'students/css/sidebar.css' %}" />
   <link rel="stylesheet" href="{% static 'students/css/subject_list.css' %}" />
   <link rel="stylesheet" href="{% static 'students/css/base.css'%}" />
   <link rel="stylesheet" href="{% static 'students/css/sidebar.css'%}" />
   <link rel="stylesheet" href="{% static 'students/css/header.css'%}" />
-  <link rel="stylesheet" href="{% static 'students/css/task_list.css'%}" />
   <link rel="stylesheet" href="{% static 'students/css/submit_solution.css'%}" />
+
   <link rel="stylesheet" href="" id="theme" />
 </head> 
 <body>
@@ -111,5 +111,6 @@
       document.querySelector("i").classList.replace("bx-moon", "bx-sun")
     }
   </script>
+  <script src="{% static 'students/js/code_editor.js' %}"></script>
 </body>
 </html>

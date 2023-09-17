@@ -8,18 +8,22 @@
   <div class="subject-list-line"></div>
   <div class="subject-list">
     {% for data in subject_data %}
-      <a class="nav-link" href="{% url 'students:task_list' data.subject.slug %}">
-        <article class="subject">
-            <div class="subject-name">
-              {{ data.subject.name }}
-            </div>
-            <img class="subject-logo" src="{{ data.subject.image.url }}" alt="{{ subject.name }} Image">
-            <p class="progress-score">Прогресс выполнения: <span style="color: #3975E7;">{{ data.completion_percentage }}%</span></p>
-            <div class="progress-bar">
-              <div class="progress" data-percentage="{{ data.completion_percentage }}"></div>
-            </div>
-        </article>
-      </a>
+      {% if data.first_task %}
+        <a class="nav-link" href="{% url 'students:submit_solution' data.subject.slug data.first_task.slug %}">
+      {% else %}
+        <a class="nav-link" href="{% url 'students:subject_list'%}">
+      {% endif %}
+          <article class="subject">
+              <div class="subject-name">
+                {{ data.subject.name }}
+              </div>
+              <img class="subject-logo" src="{{ data.subject.image.url }}" alt="{{ subject.name }} Image">
+              <p class="progress-score">Прогресс выполнения: <span style="color: #3975E7;">{{ data.completion_percentage }}%</span></p>
+              <div class="progress-bar">
+                <div class="progress" data-percentage="{{ data.completion_percentage }}"></div>
+              </div>
+          </article>
+        </a>
     {% endfor %}
   </div>
 </section>

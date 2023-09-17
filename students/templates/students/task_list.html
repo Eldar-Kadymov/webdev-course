@@ -1,8 +1,0 @@
-{% extends 'students/base_with_sidebar.html' %}
-
-{% block content %}
-  <div class="task-list-title">Задания по предмету {{ subject.name }}</div>
-    {% for task in tasks %}
-      <a class="task" href="{% url 'students:submit_solution' task.slug %}">{{ task.title }}</a>
-    {% endfor %}
-{% endblock %}

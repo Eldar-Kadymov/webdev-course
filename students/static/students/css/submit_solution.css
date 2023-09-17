@@ -30,6 +30,7 @@
   border-radius: 20px;
   border: 2px solid #cfcfcf;
   width: 1260px;
+    background-color: white;
 }
 
 .tasks {
@@ -106,6 +107,17 @@
   margin-left: 20px;
 }
 
+.task-status-done {
+  position: relative;
+  font-size: 14px;
+  color: #4FBD4C;
+  border: #4FBD4C solid 1px;
+  padding: 2px 20px;
+  border-radius: 6px;
+  bottom: 3px;
+  margin-left: 20px;
+}
+
 .task-submit {
   margin-left: 43px;
   width: 100%;
@@ -126,14 +138,6 @@
   margin-bottom: 25px;
 }
 
-.CodeMirror {
-  font-size: 16px; 
-  width: 100%;
-  height: 480px;
-  border-radius: 12px;
-  border: 2px solid #cecece;
-}
-
 .submit-button {
   float: right;
   color: #fff;
@@ -142,4 +146,54 @@
   border: none;
   padding: 5px 20px;
   margin-top: 20px;
+}
+
+.CodeMirror {
+  font-size: 16px; 
+  width: 100%;
+  height: 480px;
+  border-radius: 12px;
+  border: 2px solid #cecece;
+  background-color: white !important;
+  color: black !important;
+}
+
+.CodeMirror-linenumbers {
+  background-color: #F8F8F8;
+}
+
+.cm-builtin {
+  color: #f07178 !important;
+}
+
+.cm-keyword {
+  color: #C792EA !important;
+}
+
+.cm-variable {
+  color: #000000 !important;
+}
+
+.cm-def {
+  color: #82AAFF !important;
+}
+
+.cm-number {
+  color: #FF5370 !important;
+}
+
+.CodeMirror-cursor {
+  border-left: 2px solid rgb(0, 0, 0);
+}
+
+.cm-operator {
+  color: #C792EA;
+}
+
+.cm-string {
+  color: #70da66 !important;
+}
+
+#code-editor {
+  display: none;
 }

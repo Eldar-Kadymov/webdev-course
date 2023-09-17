@@ -2,19 +2,31 @@
 
 {% block content %}
 <div class="task-navbar">
-  <a href="#" class="task-nav-item">Список предметов</a>
+  <a href="{% url 'students:subject_list'%}" class="task-nav-item">Список предметов</a>
   <span class="task-arrow">></span>
-  <a href="#" class="task-nav-item">Список предметов</a>
+  <a href="#" class="task-nav-item">{{ subject.name }}</a>
 </div>
 <section class="task-info">
   <aside class="tasks">
-    <p class="submit-task-name">Название предмета</p>
+    <p class="submit-task-name">{{ subject.name }}</p>
     <p class="submit-task-list">Список заданий</p>
-    <div class="submit-tasks">Название задания <div class="task-indicator"></div></div> 
-    <div class="submit-tasks">Название задания <div class="task-indicator-done"></div></div> 
+    {% for task in tasks %}
+    <div class="submit-tasks"><a href="{% url 'students:submit_solution' subject.slug task.slug %}">{{ task.title }}</a>
+        {% if task in completed_tasks %}
+          <div class="task-indicator-done"></div>
+        {% else %}
+          <div class="task-indicator"></div>
+        {% endif %}
+      </div> 
+    {% endfor %}
   </aside>
   <div class="task-detail">
-    <p class="task-title">{{ task.title }}. <span class="task-status">не решено</span></p>
+    <p class="task-title">{{ task.title }}. 
+      {% if task in completed_tasks %}
+        <span class="task-status-done">Выполнено</span></p>
+      {% else %}
+        <span class="task-status">Не выполнено</span></p>
+      {% endif %}
     <div class="task-submit">
       <div class="description">Описание</div>
       <div class="task-description">{{ task.description }}</div>
@@ -27,12 +39,5 @@
   </div>
 </section>
 
-<script>
-  // Создаем редактор CodeMirror из элемента textarea
-    var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
-    lineNumbers: true,  // Показывать номера строк
-    mode: "python",     // Режим подсветки синтаксиса Python
-    theme: "default"
-  })  
-</script>
+
 {% endblock %}

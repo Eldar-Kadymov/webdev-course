@@ -16,7 +16,6 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  transition-duration: 0.2s;
 }
 
 main {

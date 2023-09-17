@@ -6,7 +6,6 @@ from .views import (
     LoginView,
     LogoutView,
     SubjectListView,
-    TaskListView,
     SubmitSolutionView
 )
 
@@ -27,12 +26,8 @@ urlpatterns = [
     path('subjects/',
          SubjectListView.as_view(), name='subject_list'),
 
-    # Маршрут для списка задач по конкретному предмету
-    path('subjects/<slug:subject_slug>/',
-         TaskListView.as_view(), name='task_list'),
-
     # Маршрут для страницы отправки решения задачи
-    path('tasks/<slug:task_slug>/',
+    path('subjects/<slug:subject_slug>/tasks/<slug:task_slug>/',
          SubmitSolutionView.as_view(), name='submit_solution'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
